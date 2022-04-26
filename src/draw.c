@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:22:50 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/04/22 17:39:52 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/04/26 09:39:35 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,17 @@
 #include <stdio.h>
 #include <math.h>
 
-
+// int map[] =           //the map array. Edit to change level but keep the outer walls
+// {
+//  1,1,1,1,1,1,1,1,
+//  1,0,1,0,0,0,0,1,
+//  1,0,1,0,0,1,0,1,
+//  1,0,1,0,0,0,0,1,
+//  1,0,0,0,0,0,0,1,
+//  1,0,0,0,0,0,0,1,
+//  1,0,0,0,0,0,0,1,
+//  1,1,1,1,1,1,1,1,	
+// };
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -42,7 +52,7 @@ void	draw_square(int px, int py, t_data *img)
 	}
 }
 
-void	draw_grid(t_data *img)
+void	draw_grid(t_data *img, int *map)
 {
 	int	x;
 	int	y;
@@ -96,3 +106,10 @@ void	draw_player(t_data *img, t_player *pl, int radius)
 		draw_angle(img, radius, *pl);
 }
 
+// void	draw_line(int dist, int color, int line)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	x = 
+// }

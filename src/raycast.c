@@ -6,14 +6,14 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/22 17:39:56 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/04/22 18:08:21 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/04/26 09:40:42 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
 
-int	calc_dist(t_player pl, t_ray ray, int ra)
+int	calc_dist(t_player pl, t_ray ray, int ra, int *map)
 {
 	int		hit;
 	int		dist;
@@ -29,7 +29,7 @@ int	calc_dist(t_player pl, t_ray ray, int ra)
 			hit++;
 	}
 	dist = (pl.py - ray.fy)/sin(degToRad(ra));
-	return(dist * cos(degToRad(abs(ra - pl.pa))));
+	return(dist * cos(degToRad(ra - pl.pa)));
 }
 
 void	horicast(t_player pl, t_ray *ray, float Tan)
@@ -40,7 +40,7 @@ void	horicast(t_player pl, t_ray *ray, float Tan)
 	ray->xa = 100/Tan;
 }
 
-void	vertricast(t_player pl, t_ray *ray, float Tan)
+void	verticast(t_player pl, t_ray *ray, float Tan)
 {
 	ray->fx = (int)(pl.py/100) * 100 + 100;
 	ray->fy = pl.py + ((pl.px - ray->fx)/Tan);
@@ -48,7 +48,7 @@ void	vertricast(t_player pl, t_ray *ray, float Tan)
 	ray->ya = 100 * Tan;
 }
 
-void raycast(t_player pl)
+int	raycast(t_player pl, int *map)
 {
 	float	Tan;
 	t_ray	ray;
@@ -57,9 +57,9 @@ void raycast(t_player pl)
 	
 	Tan = tan(degToRad(pl.pa));
 	horicast(pl, &ray, Tan);
-	hor = calc_dist(pl, ray, pl.pa);
+	hor = calc_dist(pl, ray, pl,pa, map);
 	verticast(pl, &ray, Tan);
-	vert = calc_dist(pl, ray, pl.pa);
+	vert = calc_dist(pl, ray, pl.pa, map);
 	if (vert < hor)
 		return (vert);
 	return (hor);

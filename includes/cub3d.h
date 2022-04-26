@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/04/22 17:44:08 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/04/26 09:27:14 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_frame {
 	t_player	*pl;
 	void		*mlx;
 	void		*mlx_win;
+	int			*map;
 }				t_frame;
 
 typedef struct	s_ray {
@@ -53,18 +54,7 @@ typedef struct	s_ray {
 void	draw_player(t_data *img, t_player *pl, int radius);
 float	degToRad(int a);
 int		FixAng(int a);
-void	draw_grid(t_data *img);
-
-int map[] =           //the map array. Edit to change level but keep the outer walls
-{
- 1,1,1,1,1,1,1,1,
- 1,0,1,0,0,0,0,1,
- 1,0,1,0,0,1,0,1,
- 1,0,1,0,0,0,0,1,
- 1,0,0,0,0,0,0,1,
- 1,0,0,0,0,0,0,1,
- 1,0,0,0,0,0,0,1,
- 1,1,1,1,1,1,1,1,	
-};
+void	draw_grid(t_data *img, int *map);
+int		raycast(t_player pl, int *map);
 
 #endif

@@ -24,7 +24,8 @@ SDIR = ./src
 
 SRCS =	main.c\
 		draw.c\
-		utils.c
+		utils.c\
+		raycast.c
 
 ODIR = ./obj
 OBJS = $(patsubst %,$(ODIR)/%,$(SRCS:.c=.o))

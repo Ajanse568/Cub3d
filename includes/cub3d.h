@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/04/26 09:27:14 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/05/02 16:39:51 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef struct	s_frame {
 }				t_frame;
 
 typedef struct	s_ray {
-	int	fx;
-	int	fy;
-	int	ya;
-	int	xa;
+	float	fx;
+	float	fy;
+	float	ya;
+	float	xa;
 }				t_ray;
 
 # define ESC 53
@@ -51,10 +51,13 @@ typedef struct	s_ray {
 # define C_L 123
 # define C_R 124
 
+void	draw_circle(t_data *img, int px, int py, int radius);
 void	draw_player(t_data *img, t_player *pl, int radius);
 float	degToRad(int a);
 int		FixAng(int a);
 void	draw_grid(t_data *img, int *map);
-int		raycast(t_player pl, int *map);
+void	raycast(t_player pl, int *map, t_data *img);
+void	draw_line(int dist, int color, int line, t_data *img);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

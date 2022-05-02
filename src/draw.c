@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:22:50 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/04/26 09:39:35 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/05/02 17:26:09 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,25 @@ void	draw_square(int px, int py, t_data *img)
 	}
 }
 
+void	draw_square_outline(int px, int py, t_data *img)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < 100)
+	{
+		y = 0;
+		while (y < 100)
+		{
+			if (x < 2 || x > 98 || y < 2 || y > 98)
+				my_mlx_pixel_put(img, px * 100 + x, py * 100 + y, 0x000000FF);
+			y++;
+		}
+		x++;
+	}
+}
+
 void	draw_grid(t_data *img, int *map)
 {
 	int	x;
@@ -65,11 +84,12 @@ void	draw_grid(t_data *img, int *map)
 		{
 			if (map[y * 8 + x])
 				draw_square(x, y, img);
+			else 
+				draw_square_outline(x, y, img);
 			y++;
 		}
 		x++;
 	}
-	
 }
 
 void	draw_angle(t_data *img, int radius, t_player pl)
@@ -77,6 +97,31 @@ void	draw_angle(t_data *img, int radius, t_player pl)
 	pl.px = pl.px + (pl.pdx * (radius + 50));
 	pl.py = pl.py + (pl.pdy * (radius + 50));
 	draw_player(img, &pl, 5);
+}
+
+void	draw_circle(t_data *img, int px, int py, int radius)
+{
+	int	sx;
+	int	sy;
+	int	x;
+	int	y;
+	int	sumsqr;
+
+	x = px - radius;
+	while (x < (px + radius))
+	{
+		y = py - radius;
+		while (y < (py + radius))
+		{
+			sx = x - (px);
+			sy = y - (py);
+			sumsqr = sy * sy + sx * sx;
+			if (sumsqr < (radius * radius))
+				my_mlx_pixel_put(img, x, y, 0x00FFFF00);
+			y++;
+		}
+		x++;
+	}
 }
 
 void	draw_player(t_data *img, t_player *pl, int radius)
@@ -106,10 +151,27 @@ void	draw_player(t_data *img, t_player *pl, int radius)
 		draw_angle(img, radius, *pl);
 }
 
-// void	draw_line(int dist, int color, int line)
-// {
-// 	int	x;
-// 	int	y;
+void	draw_line(int dist, int color, int line, t_data *img)
+{
+	int	x;
+	int	y;
+	int	lineH;
+	int	i = 0;
+	int	c = 0;
 
-// 	x = 
-// }
+	x = 900 + line * 15;
+	y = 800 / 2;
+	lineH = 400 - 400 * (dist / 900.0);
+	printf("line:%i dist:%f lineH: %i\n", line, dist / 1142.0, lineH);
+	while (c < 15)
+	{
+		i = 0;
+		while (i < lineH)
+		{
+			my_mlx_pixel_put(img, x + c, y + i, color);
+			my_mlx_pixel_put(img, x + c, y - i, color);
+			i++;
+		}
+		c++;
+	}
+}

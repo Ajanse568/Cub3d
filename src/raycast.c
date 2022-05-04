@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/22 17:39:56 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/05/02 18:08:04 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/05/04 15:22:35 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,80 +14,125 @@
 #include <math.h>
 #include <stdio.h>
 
-int	calc_dist(t_player pl, t_ray ray, int ra, int *map, t_data *img)
-{
-	int		hit;
-	int		dist;
+#define MapW 16
 
-	hit = 0;
-	//printf("Begin fy: %i fx: %i ya: %f xa: %f\n", (int)ray.fy, (int)ray.fx, ray.ya, ray.xa);
-	if (map[((int)ray.fy/100) * 8 + (int)ray.fx/100])
-		hit++;
-	while (!hit)
+float	calc_dist(t_player pl, t_ray *ray, float ra, int *map)//, t_data *img)
+{
+	int		dof;
+	float	dist;
+	int		mp;
+
+	dist = 10000;
+	dof = 0;
+	if(ray->fx == pl.px && ray->fy == pl.py)
+		dof = MapW - 2;
+	while(dof < (MapW - 2))
 	{
-		ray.fy -= ray.ya;
-		ray.fx += ray.xa;
-		if (map[((int)ray.fy/100) * 8 +(int)ray.fx/100])
-			hit++;
+		mp = (int)ray->fx / 100 + ((int)ray->fy / 100 * 8);
+		//printf("mp: %i\n", mp);
+		if (mp > 0 && mp < 16*8 && map[mp] == 1)
+		{
+			dof = MapW - 2;
+			dist = cos(degToRad(ra))*(ray->fx-pl.px)-sin(degToRad(ra))*(ray->fy-pl.py);
+		}
+		else
+		{
+			ray->fx += ray->xa;
+			ray->fy += ray->ya;
+			dof++;
+		}
 	}
-	//printf("Hit! fy: %i fx: %i ya: %f yx: %f\n", (int)ray.fy, (int)ray.fx, ray.ya, ray.xa);
-	if (ray.fx < 800)
-		draw_circle(img, ray.fx, ray.fy, 2);
-	dist = (pl.py - ray.fy)/sin(degToRad(ra));
-	return (dist * cos(degToRad(FixAng(ra - pl.pa))));
+	return (dist);
 }
 
-void	horicast(t_player pl, t_ray *ray, float Tan)
+t_ray	verticast(float ra, t_player pl, float Tan)
 {
-	ray->fy = (int)(pl.py/100) * 100 - 1;
-	ray->fx = pl.px + ((pl.py - ray->fy)/Tan);
-	ray->ya = 100;
-	ray->xa = 100/Tan;
-	//printf("HOR fy: %f, fx: %f, ya: %f, xa: %f pl.px: %f pl.py: %d result: %f\n", ray->fy, ray->fx, ray->ya, ray->xa, pl.px, (int)pl.py, ((int)pl.py - ray->fy));
+	t_ray	ray;
+
+	if (cos(degToRad(ra)) > 0.001)
+	{
+		ray.fx = (int)(pl.px/100) * 100 + 100;
+		ray.fy = pl.py + ((pl.px - ray.fx)*Tan);
+		ray.xa = 100;
+		ray.ya = -100*Tan;
+	}
+	else if (cos(degToRad(ra)) < -0.001)
+	{
+		ray.fx = (int)(pl.px/100) * 100 - 0.0001;
+		ray.fy = pl.py + ((pl.px - ray.fx)*Tan);
+		ray.xa = -100;
+		ray.ya = 100*Tan;
+	}
+	else
+	{
+		ray.fx = pl.px;
+		ray.fy = pl.py;
+	}
+	return(ray);
 }
 
-void	verticast(t_player pl, t_ray *ray, float Tan)
+t_ray	horicast(int ra, t_player pl, float Tan)
 {
-	ray->fx = (int)(pl.py/100) * 100 + 100;
-	ray->fy = pl.py + ((pl.px - ray->fx)*Tan);
-	ray->xa = 100;
-	ray->ya = 100 * Tan;
-	printf("VERT fy: %f, fx: %f, ya: %f, xa: %f\n", ray->fy, ray->fx, ray->ya, ray->xa);
+	t_ray	ray;
+
+	Tan = 1.0/Tan;
+	if (sin(degToRad(ra)) > 0.001)
+	{
+		ray.fy = (int)(pl.py/100) * 100 - 0.0001;
+		ray.fx = pl.px + ((pl.py - ray.fy)*Tan);
+		ray.ya = -100;
+		ray.xa = 100*Tan;
+	}
+	else if (sin(degToRad(ra)) < -0.001)
+	{
+		ray.fy = (int)(pl.py/100) * 100 + 100;
+		ray.fx = pl.px + ((pl.py - ray.fy)*Tan);
+		ray.ya = 100;
+		ray.xa = -100*Tan;
+	}
+	else
+	{
+		ray.fx = pl.px;
+		ray.fy = pl.py;
+	}
+	return(ray);
 }
 
 void	raycast(t_player pl, int *map, t_data *img)
 {
 	float	Tan;
-	t_ray	ray;
-	int		hor;
-	int		vert;
-	int		ra;
+	t_ray	hor;
+	t_ray	vert;
+	float	ra;
 	int		i = 0;
 
 	ra = FixAng(pl.pa + 30);
-	while (i < 60)
+	// printf("ra:%f\n", ra);
+	while (i < 120 * 2 * 2)
 	{
 		Tan = tan(degToRad(ra));
-		printf("ra: %i\n", ra);
-		horicast(pl, &ray, Tan);
-		// 	draw_circle(img, ray.fx, ray.fy, 2);
-		//my_mlx_pixel_put(img, ray.fx, ray.fy, 0x0000FF00);
-		if (ray.fx < 800)
-			hor = calc_dist(pl, ray, ra, map, img);
+		hor = horicast(ra, pl, Tan);
+		//printf("hor.fx: %f hor.fy: %f hor.xa: %f hor.ya: %f\n", hor.fx, hor.fy, hor.xa, hor.ya);
+		vert = verticast(ra, pl, Tan);
+		hor.dist = calc_dist(pl, &hor, ra, map);//, img);
+		vert.dist = calc_dist(pl, &vert, ra, map);//, img);
+		// if (i%2 == 0)
+		// 	printf("line %i\nBefore fish_fix - vert.dist: %f hor.dist: %f\n", i, vert.dist, hor.dist);
+		vert.dist = vert.dist*cos(degToRad(FixAng(pl.pa - ra)));
+		hor.dist = hor.dist*cos(degToRad(FixAng(pl.pa - ra)));
+		// if (i%2 == 0)
+		// 	printf("After fish_fix - vert.dist: %f hor.dist: %f\n\n", vert.dist, hor.dist);
+		if (hor.dist < vert.dist)
+		{
+			//draw_circle(img, hor.fx, hor.fy, 2);
+			draw_line(hor.dist, 0x008B4513, i, img);
+		}
 		else
-			hor = 10000;
-		verticast(pl, &ray, Tan);
-		// draw_circle(img, ray.fx, ray.fy, 2);
-		//my_mlx_pixel_put(img, ray.fx, ray.fy, 0x0000FF00);
-		if (ray.fy > 0)
-			vert = calc_dist(pl, ray, ra, map, img);
-		else 
-			vert = 10000;
-		if (vert < hor)
-			draw_line(vert, 0x00FF0000, i, img);
-		else
-			draw_line(hor, 0x00330000, i, img);
+		{
+			//draw_circle(img, vert.fx, vert.fy, 2);
+			draw_line(vert.dist, 0x00774513, i, img);
+		}
 		i++;
-		ra = FixAng(ra - 1);
+		ra = FixAng(ra - 0.5 / 2 / 2);
 	}
 }

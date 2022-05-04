@@ -6,25 +6,13 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:22:50 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/05/02 17:26:09 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/05/04 15:21:05 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdio.h>
 #include <math.h>
-
-// int map[] =           //the map array. Edit to change level but keep the outer walls
-// {
-//  1,1,1,1,1,1,1,1,
-//  1,0,1,0,0,0,0,1,
-//  1,0,1,0,0,1,0,1,
-//  1,0,1,0,0,0,0,1,
-//  1,0,0,0,0,0,0,1,
-//  1,0,0,0,0,0,0,1,
-//  1,0,0,0,0,0,0,1,
-//  1,1,1,1,1,1,1,1,	
-// };
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -153,23 +141,30 @@ void	draw_player(t_data *img, t_player *pl, int radius)
 
 void	draw_line(int dist, int color, int line, t_data *img)
 {
-	int	x;
-	int	y;
-	int	lineH;
-	int	i = 0;
-	int	c = 0;
+	int		x;
+	int		y;
+	int		lineH;
+	int		i = 0;
+	int		c = 0;
 
-	x = 900 + line * 15;
+	x =line * 3;
 	y = 800 / 2;
-	lineH = 400 - 400 * (dist / 900.0);
-	printf("line:%i dist:%f lineH: %i\n", line, dist / 1142.0, lineH);
-	while (c < 15)
+	lineH = 400 * (200.0 / dist);
+	if (lineH > 400)
+		lineH = 400;
+	while (c < 3)
 	{
 		i = 0;
 		while (i < lineH)
 		{
 			my_mlx_pixel_put(img, x + c, y + i, color);
 			my_mlx_pixel_put(img, x + c, y - i, color);
+			i++;
+		}
+		while(i < 400)
+		{
+			my_mlx_pixel_put(img, x + c, y + i, 0x007CFC00);
+			my_mlx_pixel_put(img, x + c, y - i, 0x00ADD8E6);
 			i++;
 		}
 		c++;

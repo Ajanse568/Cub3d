@@ -20,12 +20,15 @@ LIBS =	-lft\
 
 FRAMEWORKS =	-framework OpenGL\
 				-framework AppKit
+
 SDIR = ./src
 
 SRCS =	main.c\
 		draw.c\
 		utils.c\
-		raycast.c
+		raycast.c\
+		controls.c\
+		movement.c
 
 ODIR = ./obj
 OBJS = $(patsubst %,$(ODIR)/%,$(SRCS:.c=.o))

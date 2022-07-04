@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/05/04 14:59:02 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/05/11 15:24:46 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_frame {
 	void		*mlx;
 	void		*mlx_win;
 	int			*map;
+	t_data		wall;
 	t_key		*key;
 }				t_frame;
 
@@ -68,14 +69,16 @@ void	draw_circle(t_data *img, int px, int py, int radius);
 void	draw_player(t_data *img, t_player *pl, int radius);
 float	degToRad(float a);
 float	FixAng(float a);
-void	draw_grid(t_data *img, int *map);
-void	raycast(t_player pl, int *map, t_data *img);
-void	draw_line(int dist, int color, int line, t_data *img);
+void	draw_grid(t_data *img, int *map, int px, int py);
+void	raycast(t_player pl, int *map, t_data *img, t_data wall);
+//void	draw_line(int dist, int color, int line, t_data *img);
+void	draw_line(int dist, int wall_x, int line, t_data *wall, t_data *img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_ray(t_data *img, t_player pl, t_ray ray);
+void	draw_wall(int dist, int wall_x, int line, t_data wall, t_data *img);
 
 //Movement
-void	move_player(t_key *key, t_player *pl);
+void	move_player(t_key *key, t_player *pl, int *map);
 void	turn_player(t_key *key, t_player *pl);
 
 //Mouse/Key events

@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:22:50 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/05/04 15:21:05 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/05/11 15:24:37 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,26 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+unsigned int	get_color(t_data *data, int x, int y)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	return (*(unsigned int*)dst);
+}
+
 void	draw_square(int px, int py, t_data *img)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	while (x < 100)
+	while (x < 16)
 	{
 		y = 0;
-		while (y < 100)
+		while (y < 16)
 		{
-			my_mlx_pixel_put(img, px * 100 + x, py * 100 + y, 0x000000FF);
+			my_mlx_pixel_put(img, px * 16 + 960 + x, py * 16 + y, 0x000000FF);
 			y++;
 		}
 		x++;
@@ -46,34 +54,38 @@ void	draw_square_outline(int px, int py, t_data *img)
 	int	y;
 
 	x = 0;
-	while (x < 100)
+	while (x < 16)
 	{
 		y = 0;
-		while (y < 100)
+		while (y < 16)
 		{
 			if (x < 2 || x > 98 || y < 2 || y > 98)
-				my_mlx_pixel_put(img, px * 100 + x, py * 100 + y, 0x000000FF);
+				my_mlx_pixel_put(img, px * 16 + 960 + x, py * 16 + y, 0x000000FF);
 			y++;
 		}
 		x++;
 	}
 }
 
-void	draw_grid(t_data *img, int *map)
+void	draw_grid(t_data *img, int *map, int px, int py)
 {
 	int	x;
 	int	y;
 
+	(void)px;
+	(void)py;
 	x = 0;
+	if (x < 0)
+		x = 0;
 	while (x < 8)
 	{
 		y = 0;
-		while(y < 8)
+		while(y < 16)
 		{
 			if (map[y * 8 + x])
 				draw_square(x, y, img);
-			else 
-				draw_square_outline(x, y, img);
+			// else 
+			// 	draw_square_outline(x, y, img);
 			y++;
 		}
 		x++;
@@ -135,36 +147,41 @@ void	draw_player(t_data *img, t_player *pl, int radius)
 		}
 		x++;
 	}
-	if (radius > 6)
-		draw_angle(img, radius, *pl);
+	// if (radius > 6)
+	// 	draw_angle(img, radius, *pl);
 }
 
-void	draw_line(int dist, int color, int line, t_data *img)
+void	draw_line(int dist, int wall_x, int line, t_data *wall, t_data *img)
 {
 	int		x;
 	int		y;
 	int		lineH;
-	int		i = 0;
+	float	steps;
+	int		i;
 	int		c = 0;
+	float	wall_y;
 
-	x =line * 3;
-	y = 800 / 2;
-	lineH = 400 * (200.0 / dist);
-	if (lineH > 400)
-		lineH = 400;
-	while (c < 3)
+	x = line * 1;
+	y = 500 / 2;
+	lineH = y * (1.5 * 64 / dist);
+	steps = 32. / lineH;
+	if (lineH > 250)
+		lineH = 250;
+	while (c < 1)
 	{
 		i = 0;
+		wall_y = 0;
 		while (i < lineH)
 		{
-			my_mlx_pixel_put(img, x + c, y + i, color);
-			my_mlx_pixel_put(img, x + c, y - i, color);
+			my_mlx_pixel_put(img, x + c, y + i, get_color(wall, wall_x, (64 / 2) + (int)wall_y));
+			my_mlx_pixel_put(img, x + c, y - i, get_color(wall, wall_x, (64 / 2) - (int)wall_y));
 			i++;
+			wall_y += steps;
 		}
-		while(i < 400)
+		while(i < 250)
 		{
-			my_mlx_pixel_put(img, x + c, y + i, 0x007CFC00);
-			my_mlx_pixel_put(img, x + c, y - i, 0x00ADD8E6);
+			my_mlx_pixel_put(img, x + c, y + i, 0x0032A840);//floor
+			my_mlx_pixel_put(img, x + c, y - i, 0x00ADD8E6);//ceiling
 			i++;
 		}
 		c++;

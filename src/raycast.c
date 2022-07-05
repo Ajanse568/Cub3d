@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/22 17:39:56 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/05/11 12:53:45 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/05 15:08:57 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #define MapW 16
 
-float	calc_dist(t_player pl, t_ray *ray, float ra, int *map)//, t_data *img)
+float	calc_dist(t_player pl, t_ray *ray, float ra, char *map)//, t_data *img)
 {
 	int		dof;
 	float	dist;
@@ -29,7 +29,7 @@ float	calc_dist(t_player pl, t_ray *ray, float ra, int *map)//, t_data *img)
 	while (dof < (MapW - 2))
 	{
 		mp = ((int)ray->fx>>6) + (((int)ray->fy>>6) * 8);
-		if (mp > 0 && mp < 16 * 8 && map[mp] == 1)
+		if (mp > 0 && mp < 16 * 8 && map[mp] == 49)
 		{
 			dof = MapW - 2;
 			dist = cos(degToRad(ra)) * (ray->fx - pl.px) - \
@@ -98,7 +98,7 @@ t_ray	horicast(int ra, t_player pl, float Tan)
 	return (ray);
 }
 
-void	raycast(t_player pl, int *map, t_data *img, t_data wall)
+void	raycast(t_player pl, char *map, t_data *img, t_data wall)
 {
 	float	Tan;
 	t_ray	hor;

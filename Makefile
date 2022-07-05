@@ -28,7 +28,11 @@ SRCS =	main.c\
 		utils.c\
 		raycast.c\
 		controls.c\
-		movement.c
+		movement.c\
+		check_map.c\
+		parse_utils.c\
+		parse.c\
+		read_textures.c
 
 ODIR = ./obj
 OBJS = $(patsubst %,$(ODIR)/%,$(SRCS:.c=.o))

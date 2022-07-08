@@ -10,16 +10,18 @@ void	get_position(t_parse *parse, t_frame *frame, int i, int j)
 		frame->pl->py = i * 64;
 	}
 	if (parse->map[i][j] == 'N')
-		frame->pl->pa = 90.0;
+		frame->pl->pa = 90;
 	if (parse->map[i][j] == 'S')
-		frame->pl->pa = 270.0;
+		frame->pl->pa = 270;
 	if (parse->map[i][j] == 'E')
-		frame->pl->pa = 360.0;
+		frame->pl->pa = 0;
 	if (parse->map[i][j] == 'W')
-		frame->pl->pa = 180.0;
+		frame->pl->pa = 180;
+	frame->pl->pdx = cos(degToRad(frame->pl->pa));
+	frame->pl->pdy = -sin(degToRad(frame->pl->pa));
 }
 
-int	check_valid_characters_map(t_parse *parse)
+int	check_valid_characters_map(t_parse *parse, t_map map_conf)
 {
 	int	i;
 	int	j;
@@ -28,7 +30,7 @@ int	check_valid_characters_map(t_parse *parse)
 	i = 0;
 	j = 0;
 	count = 0;
-	while (i < parse->height_map)
+	while (i < map_conf.map_height)
 	{
 		while (parse->map[i][j])
 		{

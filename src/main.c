@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:21 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/05 15:05:14 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/07/08 13:02:33 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,18 @@
 int	render_frame(t_frame *frame)
 {
 	t_data	img;
-	t_data	minimap;
 
 	img.img = mlx_new_image(frame->mlx, 960, 500);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 								&img.line_length, &img.endian);
-	minimap.img = mlx_new_image(frame->mlx, 8 * 16, 8 * 16);
-	minimap.addr = mlx_get_data_addr(minimap.img, &minimap.bits_per_pixel, \
-								&minimap.line_length, &minimap.endian);
+	// minimap.img = mlx_new_image(frame->mlx, 8 * 16, 8 * 16);
+	// minimap.addr = mlx_get_data_addr(minimap.img, &minimap.bits_per_pixel, \
+	// 							&minimap.line_length, &minimap.endian);
 	if (!check_keys(frame->key, W))
-		move_player(frame->key, frame->pl, frame->map);
+		move_player(frame->key, frame->pl, frame->map_conf->map);
 	if (!check_keys(frame->key, C_L))
 		turn_player(frame->key, frame->pl);
-	//draw_grid(&minimap, frame->map, frame->pl->px, frame->pl->py);
-	//draw_player(&img, frame->pl, 15);
-	raycast(*frame->pl, frame->map, &img, frame->wall);
+	raycast(*frame->pl, *frame->map_conf, &img);
 	mlx_put_image_to_window(frame->mlx, frame->mlx_win, img.img, 0, 0);
 	mlx_destroy_image(frame->mlx, img.img);
 	return (0);
@@ -46,11 +43,9 @@ t_player	*cub_init(t_key *key)
 	pl = malloc(sizeof(t_player));
 	if (!pl)
 		return (0);
-	pl->px = 150;
-	pl->py = 345;
-	pl->pa = 90;
-	pl->pdx = cos(degToRad(pl->pa));
-	pl->pdy = -sin(degToRad(pl->pa));
+	// pl->px = 150;
+	// pl->py = 345;
+	// pl->pa = 90;
 	key->w = 0;
 	key->a = 0;
 	key->s = 0;
@@ -60,28 +55,41 @@ t_player	*cub_init(t_key *key)
 	return (pl);
 }
 
+void	load_walls(t_data *walls, t_parse parse, t_frame frame)
+{
+	int	i;
+	int	x;
+
+	x = 64;
+	i = 0;
+	while (i < 4)
+	{
+		walls[i].img = mlx_xpm_file_to_image(frame.mlx, parse.walls[i], &x, &x);
+		walls[i].addr = mlx_get_data_addr(walls[i].img, &walls[i].bits_per_pixel, \
+										&walls[i].line_length, &walls[i].endian);
+		i++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_frame	frame;
+	t_map	map_conf;
 	t_key	key;
 	t_parse parse;
-	int		i = 64;
 
 	(void)argc;
 	init_parse(&parse);
 	frame.pl = cub_init(&key);
+	frame.map_conf = &map_conf;
 	parsing(&parse, &frame, argv[1]);
-	// frame.map = map;
 	frame.mlx = mlx_init();
-	frame.mlx_win = mlx_new_window(frame.mlx, 960 + 64 * 8, 500, "Cub3d");
+	frame.mlx_win = mlx_new_window(frame.mlx, 960, 500, "Cub3d");
 	frame.key = &key;
-	frame.wall.img = mlx_xpm_file_to_image(frame.mlx, "textures/wall_3.xpm", &i, &i);
-	frame.wall.addr = mlx_get_data_addr(frame.wall.img, &frame.wall.bits_per_pixel, \
-										&frame.wall.line_length, &frame.wall.endian);
+	load_walls(frame.map_conf->walls, parse, frame);
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_PRESS, 0, &key_press, &key);
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_RELEASE, 0, &key_release, &key);
 	mlx_hook(frame.mlx_win, 17, 0, red_cross, &key);
-	//render_frame(&frame);
 	mlx_loop_hook(frame.mlx, render_frame, &frame);
 	mlx_loop(frame.mlx);
 }

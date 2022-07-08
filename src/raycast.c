@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/22 17:39:56 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/05 15:08:57 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/07/08 12:57:48 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 #include <math.h>
 #include <stdio.h>
 
-#define MapW 16
 
-float	calc_dist(t_player pl, t_ray *ray, float ra, char *map)//, t_data *img)
+float	calc_dist(t_player pl, t_ray *ray, float ra, t_map map_conf)//, t_data *img)
 {
 	int		dof;
 	float	dist;
@@ -25,13 +24,13 @@ float	calc_dist(t_player pl, t_ray *ray, float ra, char *map)//, t_data *img)
 	dist = 10000;
 	dof = 0;
 	if (ray->fx == pl.px && ray->fy == pl.py)
-		dof = MapW - 2;
-	while (dof < (MapW - 2))
+		dof = map_conf.map_width - 2;
+	while (dof < (map_conf.map_width - 2))
 	{
 		mp = ((int)ray->fx>>6) + (((int)ray->fy>>6) * 8);
-		if (mp > 0 && mp < 16 * 8 && map[mp] == 49)
+		if (mp > 0 && mp < map_conf.map_width * map_conf.map_height && map_conf.map[mp] == '1')
 		{
-			dof = MapW - 2;
+			dof = map_conf.map_width - 2;
 			dist = cos(degToRad(ra)) * (ray->fx - pl.px) - \
 			sin(degToRad(ra)) * (ray->fy - pl.py);
 		}
@@ -98,7 +97,7 @@ t_ray	horicast(int ra, t_player pl, float Tan)
 	return (ray);
 }
 
-void	raycast(t_player pl, char *map, t_data *img, t_data wall)
+void	raycast(t_player pl, t_map map_conf, t_data *img)
 {
 	float	Tan;
 	t_ray	hor;
@@ -112,20 +111,14 @@ void	raycast(t_player pl, char *map, t_data *img, t_data wall)
 		Tan = tan(degToRad(ra));
 		hor = horicast(ra, pl, Tan);
 		vert = verticast(ra, pl, Tan);
-		hor.dist = calc_dist(pl, &hor, ra, map);//, img);
-		vert.dist = calc_dist(pl, &vert, ra, map);//, img);
+		hor.dist = calc_dist(pl, &hor, ra, map_conf);//, img);
+		vert.dist = calc_dist(pl, &vert, ra, map_conf);//, img);
 		vert.dist = vert.dist * cos(degToRad(FixAng(pl.pa - ra)));
 		hor.dist = hor.dist * cos(degToRad(FixAng(pl.pa - ra)));
 		if (hor.dist < vert.dist)
-		{
-			//draw_circle(img, hor.fx, hor.fy, 2);
-			draw_line(hor.dist, (int)hor.fx % 64, i, &wall, img);
-		}
+			draw_line(hor.dist, (int)hor.fx % 64, i, &map_conf.walls[0], img);
 		else
-		{
-			//draw_circle(img, vert.fx, vert.fy, 2);
-			draw_line(vert.dist, (int)vert.fy % 64, i, &wall, img);
-		}
+			draw_line(vert.dist, (int)vert.fy % 64, i, &map_conf.walls[3], img);
 		i++;
 		ra = FixAng(ra - 0.1875 / 3);//0.25 / 2);
 	}

@@ -58,7 +58,7 @@ void	make_map(t_parse *parse, t_frame *frame)
 	i = parse->i;
 	while (parse->args[i])
 		i++;
-	parse->map = calloc ((i - parse->i) + 2, sizeof(char *));
+	parse->map = ft_calloc((i - parse->i) + 2, sizeof(char *));
 	while (parse->args[parse->i])
 	{
 		parse->map[k] = ft_strdup(parse->args[parse->i]);
@@ -108,28 +108,21 @@ char	*conv_to_arr(char **map_d)
 		ft_strlcpy(&map[i * line_len], map_d[i], line_len);
 		i++;
 	}
-	i = 0;
-	while (i < 14)
-	{
-		printf("%s", map + (i * line_len));
-		i++;
-	}
 	return (map);
 }
 
 void	parsing(t_parse *parse, t_frame *frame, char *file_name)
 {
-    (void)frame;
 	read_args(parse, file_name);
 	if (check_elements_on_top(parse))
 	 	exit_program("The given arguments are invalid.\n");
 	parse->count_args = 0;
 	read_textures(parse);
 	make_map(parse, frame);
-	get_height_and_width(parse);
+	get_height_and_width(parse, frame);
 	if (check_borders(parse, frame))
 		exit_program("Map is invalid.\n");
-	if (check_valid_characters_map(parse))
+	if (check_valid_characters_map(parse, *frame->map_conf))
 		exit_program("Map is invalid.\n");
-	frame->map = conv_to_arr(parse->map);
+	frame->map_conf->map = conv_to_arr(parse->map);
 }

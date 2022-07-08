@@ -29,13 +29,13 @@ void	read_textures(t_parse *parse)
 		while (parse->args[i][j])
 		{
 			if (parse->args[i][j] == 'N' && parse->args[i][j + 1] == 'O')
-				parse->north = get_texture(parse, i, j, 2);
+				parse->walls[0] = get_texture(parse, i, j, 2);
 			if (parse->args[i][j] == 'S' && parse->args[i][j + 1] == 'O')
-				parse->south = get_texture(parse, i , j, 2);
+				parse->walls[1] = get_texture(parse, i , j, 2);
 			if (parse->args[i][j] == 'W' && parse->args[i][j + 1] == 'E')
-				parse->west = get_texture(parse, i, j, 2);
+				parse->walls[2] = get_texture(parse, i, j, 2);
 			if (parse->args[i][j] == 'E' && parse->args[i][j + 1] == 'A')
-				parse->east = get_texture(parse, i, j, 2);
+				parse->walls[3] = get_texture(parse, i, j, 2);
 			if (parse->args[i][j] == 'F')
 				parse->floor = get_texture(parse, i, j, 1);
 			if (parse->args[i][j] == 'C')

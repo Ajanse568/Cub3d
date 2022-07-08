@@ -1,5 +1,6 @@
 #include "cub3d.h"
 #include "libft.h"
+#include <stdio.h>
 
 int	check_elementes(t_parse *parse, int i, int j)
 {
@@ -87,14 +88,13 @@ int	check_borders(t_parse *parse, t_frame *frame)
 
 	i = 0;
 	j = 0;
-	(void)frame;
 	while (parse->map[i])
 	{
 		j = 0;
 		while (parse->map[i][j])
 		{
 			get_position(parse, frame, i, j);
-			if (i == 0 || i == parse->height_map)
+			if (i == 0 || i == frame->map_conf->map_height - 1)
 			{
 				if (check_top_bottom_border(parse, i, j))
 					return (1);

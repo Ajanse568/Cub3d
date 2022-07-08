@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:22:50 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/05/11 15:24:37 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/05 17:42:08 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,6 @@ void	draw_player(t_data *img, t_player *pl, int radius)
 		}
 		x++;
 	}
-	// if (radius > 6)
-	// 	draw_angle(img, radius, *pl);
 }
 
 void	draw_line(int dist, int wall_x, int line, t_data *wall, t_data *img)

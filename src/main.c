@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:21 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/08 13:02:33 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/12 13:09:22 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ t_player	*cub_init(t_key *key)
 	pl = malloc(sizeof(t_player));
 	if (!pl)
 		return (0);
-	// pl->px = 150;
-	// pl->py = 345;
-	// pl->pa = 90;
 	key->w = 0;
 	key->a = 0;
 	key->s = 0;
@@ -90,6 +87,7 @@ int	main(int argc, char *argv[])
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_PRESS, 0, &key_press, &key);
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_RELEASE, 0, &key_release, &key);
 	mlx_hook(frame.mlx_win, 17, 0, red_cross, &key);
+	//render_frame(&frame);
 	mlx_loop_hook(frame.mlx, render_frame, &frame);
 	mlx_loop(frame.mlx);
 }

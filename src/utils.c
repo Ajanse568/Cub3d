@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/22 15:20:51 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/08 12:43:44 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/12 13:10:28 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	get_height_and_width(t_parse *parse, t_frame *frame)
 			width = ft_strlen(parse->map[i]);
 		i++;
 	}
-	frame->map_conf->map_width = width - 1;
+	frame->map_conf->map_width = width + 1;
 	frame->map_conf->map_height = i;
 	i = 0;
 }

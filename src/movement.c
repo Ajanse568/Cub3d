@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/04 14:53:01 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/05 15:08:57 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/07/12 13:12:02 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_square(int sign, int sign2, t_player *pl, char *map)
 
 	n_x = pl->px + sign * pl->pdx * 15;
 	n_y = pl->py + sign2 * pl->pdy * 15;
-	if (map[(n_x>>6) + (n_y>>6) * 8] == 49)
+	if (map[(n_x>>6) + (n_y>>6) * 8] == '1')
 		return (0);
 	return (1);
 }

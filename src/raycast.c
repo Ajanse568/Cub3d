@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/22 17:39:56 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/08 12:57:48 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/12 13:09:15 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ float	calc_dist(t_player pl, t_ray *ray, float ra, t_map map_conf)//, t_data *im
 		dof = map_conf.map_width - 2;
 	while (dof < (map_conf.map_width - 2))
 	{
-		mp = ((int)ray->fx>>6) + (((int)ray->fy>>6) * 8);
+		mp = ((int)ray->fx>>6) + (((int)ray->fy>>6) * (map_conf.map_width));
 		if (mp > 0 && mp < map_conf.map_width * map_conf.map_height && map_conf.map[mp] == '1')
 		{
 			dof = map_conf.map_width - 2;

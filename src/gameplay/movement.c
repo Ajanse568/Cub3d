@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/04 14:53:01 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/12 13:12:02 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/12 16:05:29 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 #include <stdio.h>
 #include "cub3d.h"
 
-int	check_square(int sign, int sign2, t_player *pl, char *map)
+int	check_square(int sign, int sign2, t_player *pl, t_map *map_conf)
 {
 	int	n_x;
 	int	n_y;
 
 	n_x = pl->px + sign * pl->pdx * 15;
 	n_y = pl->py + sign2 * pl->pdy * 15;
-	if (map[(n_x>>6) + (n_y>>6) * 8] == '1')
+	if (map_conf->map[(n_x>>6) + (n_y>>6) * map_conf->map_width] == '1')
 		return (0);
 	return (1);
 }
 
-void	move_player(t_key *key, t_player *pl, char *map)
+void	move_player(t_key *key, t_player *pl, t_map *map_conf)
 {
 	int	pm;
 	int	pm2;
@@ -37,7 +37,7 @@ void	move_player(t_key *key, t_player *pl, char *map)
 		pm = -1;
 	if (key->a || key->s)
 		pm2 = -1;
-	if ((key->w || key->s) && check_square(pm, pm2, pl, map))
+	if ((key->w || key->s) && check_square(pm, pm2, pl, map_conf))
 	{
 		pl->px += pm * pl->pdx * 5;
 		pl->py += pm2 * pl->pdy * 5;

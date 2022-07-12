@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/08 11:59:52 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/12 16:06:02 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ typedef struct s_map {
 }			t_map;
 
 typedef struct s_frame {
-	t_player		*pl;
 	void			*mlx;
 	void			*mlx_win;
+	t_player		*pl;
 	t_map			*map_conf;
 	t_key			*key;
 }					t_frame;
@@ -83,20 +83,22 @@ typedef struct s_ray {
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
 
-void	draw_circle(t_data *img, int px, int py, int radius);
-void	draw_player(t_data *img, t_player *pl, int radius);
+// void	draw_circle(t_data *img, int px, int py, int radius);
+// void	draw_player(t_data *img, t_player *pl, int radius);
 float	degToRad(float a);
 float	FixAng(float a);
-void	draw_grid(t_data *img, int *map, int px, int py);
-void	raycast(t_player pl, t_map map_conf, t_data *img);
-//void	draw_line(int dist, int color, int line, t_data *img);
-void	draw_line(int dist, int wall_x, int line, t_data *wall, t_data *img);
+// void	draw_grid(t_data *img, int *map, int px, int py);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_ray(t_data *img, t_player pl, t_ray ray);
-void	draw_wall(int dist, int wall_x, int line, t_data wall, t_data *img);
 void	exit_program(char *exit_message);
 char	*ft_substr_free(char const *s, unsigned int start, unsigned int len);
 void	get_height_and_width(t_parse *parse, t_frame *frame);
+
+//Raycast
+void	cast_rays(t_player pl, t_map map_conf, t_data *img);
+float	ray_dist(t_player pl, t_ray *ray, float ra, t_map map_conf);
+
+//Draw
+void	draw_wall(t_ray ray, int ray_no, t_data *walls, t_data *img);
 
 //Parsing
 void	init_parse(t_parse *parse);
@@ -119,7 +121,7 @@ int		check_valid_characters_map(t_parse *parse, t_map map_conf);
 // int		check_spaces(t_parse *parse);
 
 //Movement
-void	move_player(t_key *key, t_player *pl, char *map);
+void	move_player(t_key *key, t_player *pl, t_map *map_conf);
 void	turn_player(t_key *key, t_player *pl);
 
 //Mouse/Key events

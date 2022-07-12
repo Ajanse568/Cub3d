@@ -26,7 +26,8 @@ SDIR = ./src
 SRCS =	main.c\
 		draw.c\
 		utils.c\
-		raycast.c\
+		make_rays.c\
+		cast_ray.c\
 		controls.c\
 		movement.c\
 		check_map.c\
@@ -37,7 +38,7 @@ SRCS =	main.c\
 ODIR = ./obj
 OBJS = $(patsubst %,$(ODIR)/%,$(SRCS:.c=.o))
 
-$(ODIR)/%.o : $(SDIR)/%.c
+$(ODIR)/%.o : $(SDIR)/*/%.c
 	@mkdir -p obj
 	@echo "Creating object : $@"
 	@$(COMPILE) $(INCLUDES) -c -o $@ $<

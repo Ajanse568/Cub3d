@@ -8,17 +8,17 @@ void	get_position(t_parse *parse, t_frame *frame, int i, int j)
 	{
 		frame->pl->px = j * 64.0;
 		frame->pl->py = i * 64.0;
+		if (parse->map[i][j] == 'N')
+			frame->pl->pa = 90.0;
+		if (parse->map[i][j] == 'S')
+			frame->pl->pa = 270.0;
+		if (parse->map[i][j] == 'E')
+			frame->pl->pa = 0.0;
+		if (parse->map[i][j] == 'W')
+			frame->pl->pa = 180.0;
+		frame->pl->pdx = cos(degToRad(frame->pl->pa));
+		frame->pl->pdy = -sin(degToRad(frame->pl->pa));
 	}
-	if (parse->map[i][j] == 'N')
-		frame->pl->pa = 90.0;
-	if (parse->map[i][j] == 'S')
-		frame->pl->pa = 270.0;
-	if (parse->map[i][j] == 'E')
-		frame->pl->pa = 0.0;
-	if (parse->map[i][j] == 'W')
-		frame->pl->pa = 180.0;
-	frame->pl->pdx = cos(degToRad(frame->pl->pa));
-	frame->pl->pdy = -sin(degToRad(frame->pl->pa));
 }
 
 int	check_valid_characters_map(t_parse *parse, t_map map_conf)

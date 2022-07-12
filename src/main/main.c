@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:21 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/12 13:09:22 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/12 17:20:19 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ int	render_frame(t_frame *frame)
 	img.img = mlx_new_image(frame->mlx, 960, 500);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 								&img.line_length, &img.endian);
-	// minimap.img = mlx_new_image(frame->mlx, 8 * 16, 8 * 16);
-	// minimap.addr = mlx_get_data_addr(minimap.img, &minimap.bits_per_pixel, \
-	// 							&minimap.line_length, &minimap.endian);
 	if (!check_keys(frame->key, W))
-		move_player(frame->key, frame->pl, frame->map_conf->map);
+		move_player(frame->key, frame->pl, frame->map_conf);
 	if (!check_keys(frame->key, C_L))
 		turn_player(frame->key, frame->pl);
-	raycast(*frame->pl, *frame->map_conf, &img);
+	cast_rays(*frame->pl, *frame->map_conf, &img);
 	mlx_put_image_to_window(frame->mlx, frame->mlx_win, img.img, 0, 0);
 	mlx_destroy_image(frame->mlx, img.img);
 	return (0);
@@ -78,16 +75,18 @@ int	main(int argc, char *argv[])
 	(void)argc;
 	init_parse(&parse);
 	frame.pl = cub_init(&key);
+	frame.key = &key;
 	frame.map_conf = &map_conf;
 	parsing(&parse, &frame, argv[1]);
 	frame.mlx = mlx_init();
 	frame.mlx_win = mlx_new_window(frame.mlx, 960, 500, "Cub3d");
-	frame.key = &key;
 	load_walls(frame.map_conf->walls, parse, frame);
+	//Hooks for the controls
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_PRESS, 0, &key_press, &key);
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_RELEASE, 0, &key_release, &key);
 	mlx_hook(frame.mlx_win, 17, 0, red_cross, &key);
-	//render_frame(&frame);
-	mlx_loop_hook(frame.mlx, render_frame, &frame);
+	//Frame_loop
+	render_frame(&frame);
+	// mlx_loop_hook(frame.mlx, render_frame, &frame);
 	mlx_loop(frame.mlx);
 }

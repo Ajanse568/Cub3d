@@ -97,32 +97,51 @@ t_ray	horicast(int ra, t_player pl, float Tan)
 	return (ray);
 }
 
-void	cast_rays(t_player pl, t_map map_conf, t_data *img)
+void	init_ray(float ra, t_player pl, t_map map_conf, t_data *img)
 {
 	float	mytan;
 	t_ray	hor;
 	t_ray	vert;
+
+	mytan = tan(degToRad(ra));
+	hor = horicast(ra, pl, mytan);
+	vert = verticast(ra, pl, mytan);
+	hor.dist = ray_dist(pl, &hor, ra, map_conf);
+	vert.dist = ray_dist(pl, &vert, ra, map_conf);
+	if (hor.dist < vert.dist)
+		draw_wall(hor, i, map_conf.walls, img);
+	else
+		draw_wall(vert, i, map_conf.walls, img);
+}
+
+int	ray_position(float pa, float ra, float fov)
+{
+	int	rpos;
+
+	rpos = SCREEN_WIDTH / 2 - (0.5f * tan(degToRad(FixAng(pl.pa - ra))) / fov) * SCREEN_WIDTH / 2;
+	if (rpos < 0)
+		rpos *= -1;
+	return (rpos)
+}
+
+void	cast_rays(t_player pl, t_map map_conf, t_data *img)
+{
 	float	ra;
 	int		i;
 	float	fov;
+	int		ray_width;
+	int		ray_pos;
 
 	i = 0;
 	ra = FixAng(pl.pa + 30);
 	fov = 0.5f * tan(degToRad(FixAng(pl.pa - ra)));
-	printf("fov:%f\n", fov);
 	while (i < SCREEN_WIDTH)
 	{
-		printf("%i:%f\n", i, 480 - (0.5f * tan(degToRad(FixAng(pl.pa - ra))) / fov) * 480);
-		mytan = tan(degToRad(ra));
-		hor = horicast(ra, pl, mytan);
-		vert = verticast(ra, pl, mytan);
-		hor.dist = ray_dist(pl, &hor, ra, map_conf);
-		vert.dist = ray_dist(pl, &vert, ra, map_conf);
-		if (hor.dist < vert.dist)
-			draw_wall(hor, i, map_conf.walls, img);
-		else
-			draw_wall(vert, i, map_conf.walls, img);
-		i += 2;
+		printf("%i:%f\n", i, SCREEN_WIDTH / 2 - (0.5f * tan(degToRad(FixAng(pl.pa - ra))) / fov) * SCREEN_WIDTH / 2);
+		ray_pos = ray_position(pl.pa, ra, fov);
+		ray_width = ray_position(pl.pa, ra - 0.125, fov) - ray_pos;
+		i += ray_width;
 		ra = FixAng(ra - 0.125);
 	}
 }
+

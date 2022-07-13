@@ -82,6 +82,8 @@ typedef struct s_ray {
 # define C_R					124
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
+# define SCREEN_WIDTH			960
+# define SCREEN_HEIGHT			500
 
 // void	draw_circle(t_data *img, int px, int py, int radius);
 // void	draw_player(t_data *img, t_player *pl, int radius);

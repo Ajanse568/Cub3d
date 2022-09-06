@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:21 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/12 17:20:19 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/18 14:46:07 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	render_frame(t_frame *frame)
 {
 	t_data	img;
 
-	img.img = mlx_new_image(frame->mlx, 960, 500);
+	img.img = mlx_new_image(frame->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 								&img.line_length, &img.endian);
 	if (!check_keys(frame->key, W))
@@ -79,14 +79,14 @@ int	main(int argc, char *argv[])
 	frame.map_conf = &map_conf;
 	parsing(&parse, &frame, argv[1]);
 	frame.mlx = mlx_init();
-	frame.mlx_win = mlx_new_window(frame.mlx, 960, 500, "Cub3d");
+	frame.mlx_win = mlx_new_window(frame.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
 	load_walls(frame.map_conf->walls, parse, frame);
 	//Hooks for the controls
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_PRESS, 0, &key_press, &key);
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_RELEASE, 0, &key_release, &key);
 	mlx_hook(frame.mlx_win, 17, 0, red_cross, &key);
 	//Frame_loop
-	render_frame(&frame);
-	// mlx_loop_hook(frame.mlx, render_frame, &frame);
+	//render_frame(&frame);
+	mlx_loop_hook(frame.mlx, render_frame, &frame);
 	mlx_loop(frame.mlx);
 }

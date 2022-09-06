@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/12 16:06:02 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/07/18 14:38:42 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,22 @@ typedef struct s_ray {
 	float	dist;
 }				t_ray;
 
+typedef struct s_line {
+	int		pos;
+	int		width;
+	float	ra;
+	int		h_or_v;
+	t_ray	ray;
+}				t_line;
+
+typedef struct s_draw {
+	int		dist;
+	int		wall_x;
+	t_line	li;
+	t_data	*wall;
+	t_data	*img;
+}				t_draw;
+
 # define ESC					53
 # define W						13
 # define A						0
@@ -82,6 +98,8 @@ typedef struct s_ray {
 # define C_R					124
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
+# define SCREEN_WIDTH			960
+# define SCREEN_HEIGHT			500
 
 // void	draw_circle(t_data *img, int px, int py, int radius);
 // void	draw_player(t_data *img, t_player *pl, int radius);
@@ -98,7 +116,7 @@ void	cast_rays(t_player pl, t_map map_conf, t_data *img);
 float	ray_dist(t_player pl, t_ray *ray, float ra, t_map map_conf);
 
 //Draw
-void	draw_wall(t_ray ray, int ray_no, t_data *walls, t_data *img);
+void	draw_wall(t_line li, t_data *walls, t_data *img);
 
 //Parsing
 void	init_parse(t_parse *parse);

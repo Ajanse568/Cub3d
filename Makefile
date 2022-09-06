@@ -24,9 +24,9 @@ FRAMEWORKS =	-framework OpenGL\
 SDIR = ./src
 
 SRCS =	main.c\
-		draw.c\
+		drawpos_test.c\
 		utils.c\
-		make_rays.c\
+		make_rayspos_test.c\
 		cast_ray.c\
 		controls.c\
 		movement.c\

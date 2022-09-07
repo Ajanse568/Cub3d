@@ -2,7 +2,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
-# include "libft.h"
+#include "libft.h"
 
 void	init_parse(t_parse *parse)
 {
@@ -45,7 +45,7 @@ void	make_map(t_parse *parse, t_frame *frame)
 	int	i;
 	int	k;
 
-    (void)frame;
+	(void)frame;
 	i = parse->i;
 	k = 0;
 	while (parse->args[parse->i])
@@ -70,8 +70,9 @@ void	make_map(t_parse *parse, t_frame *frame)
 int	arrlen(char **map_d)
 {
 	int	i;
+
 	i = 0;
-	while(map_d[i])
+	while (map_d[i])
 		i++;
 	return (i);
 }
@@ -81,9 +82,10 @@ int	linelen(char **map_d)
 	int	longest;
 	int	len;
 	int	i;
+
 	i = 0;
 	longest = 0;
-	while	(map_d[i])
+	while (map_d[i])
 	{
 		len = ft_strlen(map_d[i]);
 		if (len > longest)
@@ -99,11 +101,12 @@ char	*conv_to_arr(char **map_d)
 	int	line_len;
 	int	i;
 	char	*map;
+
 	len = arrlen(map_d);
 	line_len = linelen(map_d);
 	map = ft_calloc(len * line_len + 1, sizeof(char));
 	i = 0;
-	while(i < len)
+	while (i < len)
 	{
 		ft_strlcpy(&map[i * line_len], map_d[i], line_len);
 		i++;

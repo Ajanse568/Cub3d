@@ -45,7 +45,7 @@ int	check_elements_on_top(t_parse *parse)
 	return (0);
 }
 
-int	check_top_bottom_border(t_parse *parse, int i , int j)
+int	check_top_bottom_border(t_parse *parse, int i, int j)
 {
 	if (ft_isalnum(parse->map[i][j]))
 	{

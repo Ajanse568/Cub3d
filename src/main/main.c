@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:21 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/18 14:46:07 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/07 12:09:58 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	load_walls(t_data *walls, t_parse parse, t_frame frame)
 	while (i < 4)
 	{
 		walls[i].img = mlx_xpm_file_to_image(frame.mlx, parse.walls[i], &x, &x);
-		walls[i].addr = mlx_get_data_addr(walls[i].img, &walls[i].bits_per_pixel, \
-										&walls[i].line_length, &walls[i].endian);
+		walls[i].addr = mlx_get_data_addr(walls[i].img, \
+		&walls[i].bits_per_pixel, &walls[i].line_length, &walls[i].endian);
 		i++;
 	}
 }
@@ -70,7 +70,7 @@ int	main(int argc, char *argv[])
 	t_frame	frame;
 	t_map	map_conf;
 	t_key	key;
-	t_parse parse;
+	t_parse	parse;
 
 	(void)argc;
 	init_parse(&parse);
@@ -79,7 +79,8 @@ int	main(int argc, char *argv[])
 	frame.map_conf = &map_conf;
 	parsing(&parse, &frame, argv[1]);
 	frame.mlx = mlx_init();
-	frame.mlx_win = mlx_new_window(frame.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
+	frame.mlx_win = mlx_new_window(frame.mlx, \
+	SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
 	load_walls(frame.map_conf->walls, parse, frame);
 	//Hooks for the controls
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_PRESS, 0, &key_press, &key);

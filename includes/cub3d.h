@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/18 14:38:42 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/07 15:03:42 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ typedef struct s_line {
 typedef struct s_draw {
 	int		dist;
 	int		wall_x;
+	int		floor;
+	int		ceiling;
 	t_line	li;
 	t_data	*wall;
 	t_data	*img;

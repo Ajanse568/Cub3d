@@ -24,16 +24,16 @@ FRAMEWORKS =	-framework OpenGL\
 SDIR = ./src
 
 SRCS =	main.c\
-		drawpos_test.c\
-		utils.c\
-		make_rayspos_test.c\
-		cast_ray.c\
 		controls.c\
 		movement.c\
+		utils.c\
 		check_map.c\
 		parse_utils.c\
 		parse.c\
-		read_textures.c
+		read_textures.c\
+		cast_ray.c\
+		make_rayspos_test.c\
+		drawpos_test.c
 
 ODIR = ./obj
 OBJS = $(patsubst %,$(ODIR)/%,$(SRCS:.c=.o))

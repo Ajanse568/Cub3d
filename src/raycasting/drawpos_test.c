@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:22:50 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/07 15:19:47 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/07 15:30:23 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <math.h>
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	draw_pixel(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -30,39 +30,46 @@ unsigned int	get_color(t_data *data, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-void	draw_line(t_draw dr)
+void	draw_column(int y, int line_h, float steps, t_draw dr)
 {
-	int		y;
-	int		lineH;
-	float	steps;
 	int		i;
 	float	wall_y;
 
-	y = 500 / 2;
-	lineH = y * (1.5 * 64 / dr.dist);
-	steps = 32. / lineH;
-	//max_height
-	if (lineH > 250)
-		lineH = 250;
 	while (dr.li.width > 0)
 	{
 		dr.li.width--;
 		i = 0;
 		wall_y = 0;
-		while (i < lineH)
+		while (i < line_h)
 		{
-			my_mlx_pixel_put(dr.img, dr.li.pos + dr.li.width, y + i, get_color(dr.wall, dr.wall_x, (64 / 2) + (int)wall_y));
-			my_mlx_pixel_put(dr.img, dr.li.pos + dr.li.width, y - i, get_color(dr.wall, dr.wall_x, (64 / 2) - (int)wall_y));
+			draw_pixel(dr.img, dr.li.pos + dr.li.width, y + i, \
+			get_color(dr.wall, dr.wall_x, (64 / 2) + (int)wall_y));
+			draw_pixel(dr.img, dr.li.pos + dr.li.width, y - i, \
+			get_color(dr.wall, dr.wall_x, (64 / 2) - (int)wall_y));
 			i++;
 			wall_y += steps;
 		}
-		while(i < 250)
+		while (i < 250)
 		{
-			my_mlx_pixel_put(dr.img, dr.li.pos + dr.li.width, y + i, dr.floor);
-			my_mlx_pixel_put(dr.img, dr.li.pos + dr.li.width, y - i, dr.ceiling);
+			draw_pixel(dr.img, dr.li.pos + dr.li.width, y + i, dr.floor);
+			draw_pixel(dr.img, dr.li.pos + dr.li.width, y - i, dr.ceiling);
 			i++;
 		}
 	}
+}
+
+void	draw_line(t_draw dr)
+{
+	int		y;
+	int		line_h;
+	float	steps;
+
+	y = 500 / 2;
+	line_h = y * (1.5 * 64 / dr.dist);
+	steps = 32. / line_h;
+	if (line_h > 250)
+		line_h = 250;
+	draw_column(y, line_h, steps, dr);
 }
 
 void	draw_wall(t_line li, t_data *walls, t_data *img)

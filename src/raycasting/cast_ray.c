@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 13:50:47 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/12 15:49:05 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/08 09:54:16 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ float	calc_dist(float ra, t_player pl, t_ray *ray)
 	float	fisheye;
 	float	dist;
 
-	fisheye = cos(degToRad(FixAng(pl.pa - ra)));
-	dist = cos(degToRad(ra)) * (ray->fx - pl.px) - \
-			sin(degToRad(ra)) * (ray->fy - pl.py);
+	fisheye = cos(deg_to_rad(fix_ang(pl.pa - ra)));
+	dist = cos(deg_to_rad(ra)) * (ray->fx - pl.px) - \
+			sin(deg_to_rad(ra)) * (ray->fy - pl.py);
 	dist = dist * fisheye;
 	return (dist);
 }

@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/04 14:53:01 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/07 12:08:21 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/08 09:54:18 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	turn_player(t_key *key, t_player *pl)
 	if (key->c_l || key->c_r)
 	{
 		pl->pa += 2 * pm;
-		pl->pa = FixAng(pl->pa);
-		pl->pdx = cos(degToRad(pl->pa));
-		pl->pdy = -sin(degToRad(pl->pa));
+		pl->pa = fix_ang(pl->pa);
+		pl->pdx = cos(deg_to_rad(pl->pa));
+		pl->pdy = -sin(deg_to_rad(pl->pa));
 	}
 }

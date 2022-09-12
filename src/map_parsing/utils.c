@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/22 15:20:51 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/07/12 13:10:28 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/08 09:53:55 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 #include <stdlib.h>
 #include "libft.h"
 
-float degToRad(float a) 
-{ 
-	return a * M_PI / 180.0;
+float	deg_to_rad(float a)
+{
+	return (a * M_PI / 180.0);
 }
 
-float FixAng(float a)
+float	fix_ang(float a)
 {
-	if(a > 359)
+	if (a > 359)
 		a -= 360;
-	if(a < 0)
+	if (a < 0)
 		a += 360;
-	return a;
+	return (a);
 }
 
 void	exit_program(char *exit_message)

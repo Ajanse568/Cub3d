@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/07 15:03:42 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/08 09:53:55 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,9 @@ typedef struct s_draw {
 
 // void	draw_circle(t_data *img, int px, int py, int radius);
 // void	draw_player(t_data *img, t_player *pl, int radius);
-float	degToRad(float a);
-float	FixAng(float a);
+float	deg_to_rad(float a);
+float	fix_ang(float a);
+
 // void	draw_grid(t_data *img, int *map, int px, int py);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	exit_program(char *exit_message);
@@ -139,6 +140,11 @@ int		check_newline_map(char *str);
 void	get_position(t_parse *parse, t_frame *frame, int i, int j);
 int		check_valid_characters_map(t_parse *parse, t_map map_conf);
 // int		check_spaces(t_parse *parse);
+
+//Parse_utils1
+void	init_parse(t_parse *parse);
+int	arrlen(char **map_d);
+int	linelen(char **map_d);
 
 //Movement
 void	move_player(t_key *key, t_player *pl, t_map *map_conf);

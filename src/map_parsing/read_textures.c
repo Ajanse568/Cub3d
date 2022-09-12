@@ -31,15 +31,13 @@ void	read_textures(t_parse *parse)
 			if (parse->args[i][j] == 'N' && parse->args[i][j + 1] == 'O')
 				parse->walls[0] = get_texture(parse, i, j, 2);
 			if (parse->args[i][j] == 'S' && parse->args[i][j + 1] == 'O')
-				parse->walls[1] = get_texture(parse, i , j, 2);
+				parse->walls[1] = get_texture(parse, i, j, 2);
 			if (parse->args[i][j] == 'W' && parse->args[i][j + 1] == 'E')
 				parse->walls[2] = get_texture(parse, i, j, 2);
 			if (parse->args[i][j] == 'E' && parse->args[i][j + 1] == 'A')
 				parse->walls[3] = get_texture(parse, i, j, 2);
-			if (parse->args[i][j] == 'F')
+			if (parse->args[i][j] == 'F' || parse->args[i][j] == 'C')
 				parse->floor = get_texture(parse, i, j, 1);
-			if (parse->args[i][j] == 'C')
-				parse->ceiling = get_texture(parse, i, j, 1);
 			j++;
 		}
 		i++;

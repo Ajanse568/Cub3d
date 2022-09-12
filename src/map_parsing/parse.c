@@ -4,13 +4,6 @@
 #include <unistd.h>
 #include "libft.h"
 
-void	init_parse(t_parse *parse)
-{
-	parse->count_args = 0;
-	parse->ch = ft_calloc(2, 1);
-	parse->str = ft_calloc(2, 1);
-}
-
 int	read_args(t_parse *parse, char *file_name)
 {
 	int		fd;
@@ -67,39 +60,11 @@ void	make_map(t_parse *parse, t_frame *frame)
 	}
 }
 
-int	arrlen(char **map_d)
-{
-	int	i;
-
-	i = 0;
-	while (map_d[i])
-		i++;
-	return (i);
-}
-
-int	linelen(char **map_d)
-{
-	int	longest;
-	int	len;
-	int	i;
-
-	i = 0;
-	longest = 0;
-	while (map_d[i])
-	{
-		len = ft_strlen(map_d[i]);
-		if (len > longest)
-			longest = len;
-		i++;
-	}
-	return (longest + 1);
-}
-
 char	*conv_to_arr(char **map_d)
 {
-	int	len;
-	int	line_len;
-	int	i;
+	int		len;
+	int		line_len;
+	int		i;
 	char	*map;
 
 	len = arrlen(map_d);
@@ -118,7 +83,7 @@ void	parsing(t_parse *parse, t_frame *frame, char *file_name)
 {
 	read_args(parse, file_name);
 	if (check_elements_on_top(parse))
-	 	exit_program("The given arguments are invalid.\n");
+		exit_program("The given arguments are invalid.\n");
 	parse->count_args = 0;
 	read_textures(parse);
 	make_map(parse, frame);

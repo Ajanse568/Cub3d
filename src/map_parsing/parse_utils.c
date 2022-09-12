@@ -4,7 +4,8 @@
 
 void	get_position(t_parse *parse, t_frame *frame, int i, int j)
 {
-	if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S' || parse->map[i][j] == 'E' || parse->map[i][j] == 'W')
+	if (parse->map[i][j] == 'N' || parse->map[i][j] == 'S' ||
+		parse->map[i][j] == 'E' || parse->map[i][j] == 'W')
 	{
 		frame->pl->px = j * 64.0;
 		frame->pl->py = i * 64.0;
@@ -16,8 +17,8 @@ void	get_position(t_parse *parse, t_frame *frame, int i, int j)
 			frame->pl->pa = 0.0;
 		if (parse->map[i][j] == 'W')
 			frame->pl->pa = 180.0;
-		frame->pl->pdx = cos(degToRad(frame->pl->pa));
-		frame->pl->pdy = -sin(degToRad(frame->pl->pa));
+		frame->pl->pdx = cos(deg_to_rad(frame->pl->pa));
+		frame->pl->pdy = -sin(deg_to_rad(frame->pl->pa));
 	}
 }
 
@@ -50,34 +51,6 @@ int	check_valid_characters_map(t_parse *parse, t_map map_conf)
 	return (0);
 }
 
-// int	check_spaces(t_parse *parse)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	check;
-
-// 	i = parse->i;
-// 	while (parse->args[i])
-// 		printf("%s\n", parse->args[i++]);
-// 	while (parse->args[i])
-// 	{
-// 		j = 0;
-// 		check = 0;
-// 		while (parse->args[i][j])
-// 		{
-// 			if (parse->args[i][j] != ' ')
-// 				check = 1;
-// 			j++;
-// 		}
-// 		if (check == 0)
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-
-
 int	search_newline(char *str, int i)
 {
 	while (str[i] != '\n')
@@ -109,7 +82,7 @@ int	check_newline_map(char *str)
 		(str[i] == 'F') || (str[i + 1] == 'C'))
 			count++;
 		if (count == 6)
-			break;
+			break ;
 		i++;
 	}
 	i++;

@@ -29,6 +29,7 @@ SRCS =	main.c\
 		utils.c\
 		check_map.c\
 		parse_utils.c\
+		parse_utils1.c\
 		parse.c\
 		read_textures.c\
 		cast_ray.c\

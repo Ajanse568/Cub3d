@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:22:50 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/07 15:30:23 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/12 13:56:27 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,28 @@ void	draw_line(t_draw dr)
 	draw_column(y, line_h, steps, dr);
 }
 
-void	draw_wall(t_line li, t_data *walls, t_data *img)
+void	draw_wall(t_line li, t_data *walls, t_map map_conf, t_data *img)
 {
 	t_draw	dr;
 
 	dr.dist = li.ray.dist;
 	dr.li = li;
-	dr.floor = 0x0032A840;
-	dr.ceiling = 0x00ADD8E6;
+	dr.floor = map_conf.floor;
+	dr.ceiling = map_conf.ceiling;
 	dr.img = img;
 	if (li.h_or_v)
 	{
 		dr.wall_x = (int)li.ray.fy % 64;
 		dr.wall = walls + 2;
+		if (li.ra < 90 || li.ra > 270)
+			dr.wall++;
 	}
 	else
 	{
 		dr.wall_x = (int)li.ray.fx % 64;
 		dr.wall = walls;
+		if (li.ra > 180)
+			dr.wall++;
 	}
 	draw_line(dr);
 }

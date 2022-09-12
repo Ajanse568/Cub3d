@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/04 14:53:01 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/08 09:54:18 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/09/12 13:49:35 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	turn_player(t_key *key, t_player *pl)
 	{
 		pl->pa += 2 * pm;
 		pl->pa = fix_ang(pl->pa);
+		printf("pa:%d\n", (int)pl->pa);
 		pl->pdx = cos(deg_to_rad(pl->pa));
 		pl->pdy = -sin(deg_to_rad(pl->pa));
 	}

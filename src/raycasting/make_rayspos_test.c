@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 14:13:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/08 09:54:14 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/09/12 13:57:23 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	cast_rays(t_player pl, t_map map_conf, t_data *img)
 		init_ray(&li, pl, map_conf);
 		li.pos = ray_position(pl.pa, li.ra, fov);
 		li.width = ray_position(pl.pa, li.ra - 0.125, fov) - li.pos;
-		draw_wall(li, map_conf.walls, img);
+		draw_wall(li, map_conf.walls, map_conf, img);
 		i += li.width;
 		li.ra = fix_ang(li.ra - 0.125);
 	}

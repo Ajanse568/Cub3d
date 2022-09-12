@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:21 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/07 12:09:58 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/12 11:11:13 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,9 @@ int	main(int argc, char *argv[])
 	frame.mlx_win = mlx_new_window(frame.mlx, \
 	SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
 	load_walls(frame.map_conf->walls, parse, frame);
-	//Hooks for the controls
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_PRESS, 0, &key_press, &key);
 	mlx_hook(frame.mlx_win, X_EVENT_KEY_RELEASE, 0, &key_release, &key);
 	mlx_hook(frame.mlx_win, 17, 0, red_cross, &key);
-	//Frame_loop
-	//render_frame(&frame);
 	mlx_loop_hook(frame.mlx, render_frame, &frame);
 	mlx_loop(frame.mlx);
 }

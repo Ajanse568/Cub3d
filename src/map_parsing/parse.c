@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parse.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ajanse <ajanse@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/12 11:12:06 by ajanse        #+#    #+#                 */
+/*   Updated: 2022/09/12 11:12:07 by ajanse        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include <fcntl.h>
 #include <stdio.h>
@@ -92,5 +104,6 @@ void	parsing(t_parse *parse, t_frame *frame, char *file_name)
 		exit_program("Map is invalid.\n");
 	if (check_valid_characters_map(parse, *frame->map_conf))
 		exit_program("Map is invalid.\n");
+	floor_ceiling_to_hex(parse, frame->map_conf);
 	frame->map_conf->map = conv_to_arr(parse->map);
 }

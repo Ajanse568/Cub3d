@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/08 09:53:55 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/09/12 11:05:12 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_key {
 typedef struct s_map {
 	char	*map;
 	t_data	walls[4];
+	int		floor;
+	int		ceiling;
 	int		map_width;
 	int		map_height;
 }			t_map;
@@ -119,12 +121,13 @@ void	cast_rays(t_player pl, t_map map_conf, t_data *img);
 float	ray_dist(t_player pl, t_ray *ray, float ra, t_map map_conf);
 
 //Draw
-void	draw_wall(t_line li, t_data *walls, t_data *img);
+void	draw_wall(t_line li, t_data *walls, t_map map_conf, t_data *img);
 
 //Parsing
 void	init_parse(t_parse *parse);
 void	parsing(t_parse *parse, t_frame *frame, char *file_name);
 void	make_map(t_parse *parse, t_frame *frame);
+void	floor_ceiling_to_hex(t_parse *parse, t_map *map_conf);
 
 //Check_map
 int		check_elements_on_top(t_parse *parse);

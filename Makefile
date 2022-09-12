@@ -34,7 +34,8 @@ SRCS =	main.c\
 		read_textures.c\
 		cast_ray.c\
 		make_rayspos_test.c\
-		drawpos_test.c
+		drawpos_test.c\
+		rgb_to_hex.c
 
 ODIR = ./obj
 OBJS = $(patsubst %,$(ODIR)/%,$(SRCS:.c=.o))

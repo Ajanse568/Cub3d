@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parse_utils.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ajanse <ajanse@student.42.fr>                +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/12 11:11:59 by ajanse        #+#    #+#                 */
+/*   Updated: 2022/09/12 13:52:14 by ajanse        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include <stdio.h>
 #include <math.h>
@@ -10,13 +22,13 @@ void	get_position(t_parse *parse, t_frame *frame, int i, int j)
 		frame->pl->px = j * 64.0;
 		frame->pl->py = i * 64.0;
 		if (parse->map[i][j] == 'N')
-			frame->pl->pa = 90.0;
+			frame->pl->pa = 90.;
 		if (parse->map[i][j] == 'S')
-			frame->pl->pa = 270.0;
+			frame->pl->pa = 270.;
 		if (parse->map[i][j] == 'E')
-			frame->pl->pa = 0.0;
+			frame->pl->pa = 0.;
 		if (parse->map[i][j] == 'W')
-			frame->pl->pa = 180.0;
+			frame->pl->pa = 180.;
 		frame->pl->pdx = cos(deg_to_rad(frame->pl->pa));
 		frame->pl->pdy = -sin(deg_to_rad(frame->pl->pa));
 	}

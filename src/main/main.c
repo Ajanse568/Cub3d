@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:21 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 14:43:22 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:04:48 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	load_walls(t_data *walls, t_parse parse, t_frame frame)
 	while (i < 4)
 	{
 		walls[i].img = mlx_xpm_file_to_image(frame.mlx, parse.walls[i], &x, &x);
+		if (walls[i].img == NULL)
+			exit_program("Texture is not valid.");
 		walls[i].addr = mlx_get_data_addr(walls[i].img, \
 		&walls[i].bits_per_pixel, &walls[i].line_length, &walls[i].endian);
 		i++;

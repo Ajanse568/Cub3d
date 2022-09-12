@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 14:39:00 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:11:37 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_parse {
 	char	*floor;
 	char	*ceiling;
 	int		i;
+	int		f_check;
+	int		c_check;
 }				t_parse;
 
 typedef struct s_data {

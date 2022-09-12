@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:12:03 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 14:38:49 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:12:16 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	init_parse(t_parse *parse)
 {
 	parse->count_args = 0;
 	parse->ch = ft_calloc(2, 1);
+	parse->f_check = 0;
+	parse->c_check = 0;
 }
 
 int	arrlen(char **map_d)

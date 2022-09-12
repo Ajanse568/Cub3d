@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:12:11 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 14:23:00 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:13:59 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,17 @@ void	tex_checker(t_parse *parse, int i, int j)
 	if (parse->args[i][j] == 'E' && parse->args[i][j + 1] == 'A')
 		parse->walls[3] = get_texture(parse, i, j, 2);
 	if (parse->args[i][j] == 'F')
+	{
+		parse->f_check++;
 		parse->floor = get_texture(parse, i, j, 1);
+	}
 	if (parse->args[i][j] == 'C')
+	{
+		parse->c_check++;
 		parse->ceiling = get_texture(parse, i, j, 1);
+	}
+	if (parse->f_check > 1 || parse->f_check > 1)
+		exit_program("Invalid floor or ceiling arguments.");
 }
 
 void	read_textures(t_parse *parse)

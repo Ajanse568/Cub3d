@@ -6,12 +6,13 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:12:11 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 11:12:13 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/12 14:23:00 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
+#include <stdio.h>
 
 char	*get_texture(t_parse *parse, int i, int j, int skip_name)
 {
@@ -61,5 +62,6 @@ void	read_textures(t_parse *parse)
 		}
 		i++;
 	}
+	printf("%s\n", parse->walls[0]);
 	parse->i = i;
 }

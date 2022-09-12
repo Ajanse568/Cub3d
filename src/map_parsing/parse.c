@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:12:06 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 11:12:07 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/09/12 14:38:10 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	read_args(t_parse *parse, char *file_name)
 		if (!check)
 			parse->str = ft_strdup(parse->ch);
 		else
-			parse->str = ft_strjoin(parse->str, parse->ch);
+			parse->str = ft_strjoin_free(parse->str, parse->ch);
 		check = 1;
 	}
 	parse->str[ft_strlen(parse->str) - 1] = '\0';

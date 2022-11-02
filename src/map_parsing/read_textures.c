@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:12:11 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:13:59 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/02 14:15:53 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	tex_checker(t_parse *parse, int i, int j)
 		parse->c_check++;
 		parse->ceiling = get_texture(parse, i, j, 1);
 	}
-	if (parse->f_check > 1 || parse->f_check > 1)
+	if (parse->f_check != 1|| parse->c_check != 1)
 		exit_program("Invalid floor or ceiling arguments.");
 }
 
@@ -60,7 +60,7 @@ void	read_textures(t_parse *parse)
 
 	j = 0;
 	i = 0;
-	while (parse->count_args < 6)
+	while (parse->count_args < 6 && parse->args[i])
 	{
 		j = 0;
 		while (parse->args[i][j])
@@ -70,6 +70,7 @@ void	read_textures(t_parse *parse)
 		}
 		i++;
 	}
-	printf("%s\n", parse->walls[0]);
+	if (parse->count_args != 6)
+		exit_program("Missing argument!");
 	parse->i = i;
 }

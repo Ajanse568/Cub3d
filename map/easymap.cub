@@ -7,7 +7,7 @@ SO ./textures/wood.xpm
 WE ./textures/redbrick.xpm
 
 F 220,100,0
-C 225,30,0
+C 220,100,0
 
 1111111111
 1000000001

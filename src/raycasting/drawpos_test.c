@@ -6,12 +6,11 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:22:50 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 13:56:27 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/11/04 11:09:27 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 #include <math.h>
 
 void	draw_pixel(t_data *data, int x, int y, int color)

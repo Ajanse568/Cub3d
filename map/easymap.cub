@@ -1,21 +1,21 @@
 NO ./textures/greystone.xpm
-
+WE ./textures/redbrick.xpm
 EA ./textures/mossy.xpm
 
 SO ./textures/wood.xpm
 
-WE ./textures/redbrick.xpm
 
 F 220,100,0
 C 220,100,0
+
 
 1111111111
 1000000001
 1000000011
 100N000011
-1000000111
-1000000011
-1000000011
+1001110111
+1001 100011
+1001110011
 1000000001
 1000000011
 1111111111

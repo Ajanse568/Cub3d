@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:11:37 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/03 11:47:05 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int		check_newline_map(char *str);
 void	get_position(t_parse *parse, t_frame *frame, int i, int j);
 int		check_valid_characters_map(t_parse *parse, t_map map_conf);
 char	*ft_strjoin_free(char *s1, char const *s2);
+
 // int		check_spaces(t_parse *parse);
 
 //Parse_utils1

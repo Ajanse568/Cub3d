@@ -6,15 +6,13 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:21 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 15:04:48 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/04 11:05:21 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <mlx.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
 
 int	render_frame(t_frame *frame)
 {

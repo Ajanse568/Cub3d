@@ -6,12 +6,11 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:11:59 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 13:52:14 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/11/04 11:07:01 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 #include <math.h>
 
 void	get_position(t_parse *parse, t_frame *frame, int i, int j)

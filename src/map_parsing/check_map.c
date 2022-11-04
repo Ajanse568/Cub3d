@@ -6,13 +6,12 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:11:54 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 11:11:56 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/11/04 11:06:31 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
-#include <stdio.h>
 
 int	check_elementes(t_parse *parse, int i, int j)
 {

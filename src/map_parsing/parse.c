@@ -6,14 +6,11 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:12:06 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 14:38:10 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/11/04 11:07:47 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
 #include "libft.h"
 
 int	read_args(t_parse *parse, char *file_name)
@@ -40,7 +37,7 @@ int	read_args(t_parse *parse, char *file_name)
 	}
 	parse->str[ft_strlen(parse->str) - 1] = '\0';
 	if (check_newline_map(parse->str))
-		exit_program("The map can not contain spaces.\n");
+		exit_program("The map or the arguments are incorrect.\n");
 	parse->args = ft_split(parse->str, '\n');
 	return (0);
 }

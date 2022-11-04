@@ -6,14 +6,13 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/22 15:20:51 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/08 09:53:55 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/04 11:09:06 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "cub3d.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 float	deg_to_rad(float a)

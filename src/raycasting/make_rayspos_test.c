@@ -6,13 +6,12 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 14:13:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/09/12 13:57:23 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/11/04 11:09:30 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
-#include <stdio.h>
 
 t_ray	verticast(float ra, t_player pl, float Tan)
 {

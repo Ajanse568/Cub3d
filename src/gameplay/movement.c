@@ -6,12 +6,11 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/04 14:53:01 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/02 13:38:52 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/11/04 11:05:55 by mberkenb      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include <stdio.h>
 #include "cub3d.h"
 
 int	check_square(int sign, int sign2, t_player *pl, t_map *map_conf)

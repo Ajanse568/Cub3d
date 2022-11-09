@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:12:06 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/04 11:07:47 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/09 13:28:39 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	read_args(t_parse *parse, char *file_name)
 	check = 0;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		return (1);
+		exit_program("Could not open map.");
 	while (read_return != 0)
 	{
 		read_return = read(fd, parse->ch, 1);

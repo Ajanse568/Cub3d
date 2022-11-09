@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:11:59 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/04 11:07:01 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/09 14:06:44 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	check_newline_map(char *str)
 			break ;
 		i++;
 	}
+	if (count != 6)
+		exit_program("Wrong arguments");
 	i++;
 	if (search_newline(str, i))
 		return (1);

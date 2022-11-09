@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 14:13:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/04 11:09:30 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/09 14:54:33 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,10 @@ void	cast_rays(t_player pl, t_map map_conf, t_data *img)
 	t_line	li;
 
 	i = 0;
+	li.width = 0;
 	li.ra = fix_ang(pl.pa + 30);
 	fov = 0.5f * tan(deg_to_rad(fix_ang(pl.pa - li.ra)));
-	while (i < SCREEN_WIDTH)
+	while (i < SCREEN_WIDTH + li.width)
 	{
 		init_ray(&li, pl, map_conf);
 		li.pos = ray_position(pl.pa, li.ra, fov);

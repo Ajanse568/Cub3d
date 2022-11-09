@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/03 11:47:05 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/09 15:59:33 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ char	*ft_strjoin_free(char *s1, char const *s2);
 
 //Parse_utils1
 void	init_parse(t_parse *parse);
-int	arrlen(char **map_d);
-int	linelen(char **map_d);
+int		arrlen(char **map_d);
+int		linelen(char **map_d);
 
 //Movement
 void	move_player(t_key *key, t_player *pl, t_map *map_conf);

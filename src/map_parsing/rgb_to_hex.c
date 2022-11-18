@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:12:17 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/04 11:17:53 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/15 13:54:36 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	floor_ceiling_to_hex(t_parse *parse, t_map *map_conf)
 	char	**rgb_floor;
 	char	**rgb_ceiling;
 
-	rgb_floor = ft_split(parse->floor, ',');
-	rgb_ceiling = ft_split(parse->ceiling, ',');
+	rgb_floor = protect(ft_split(parse->floor, ','));
+	rgb_ceiling = protect(ft_split(parse->ceiling, ','));
 	check_legal_rgb(rgb_floor);
 	check_legal_rgb(rgb_ceiling);
 	map_conf->floor = convert_rgb_to_hex(rgb_floor);

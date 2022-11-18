@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/22 15:20:51 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/04 11:09:06 by mberkenb      ########   odam.nl         */
+/*   Updated: 2022/11/15 13:59:13 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ char	*ft_substr_free(char const *s, unsigned int start, unsigned int len)
 	if (!s)
 		return (0);
 	if (start >= ft_strlen(s))
-		return (ft_strdup("\0"));
+		return (protect(ft_strdup("\0")));
 	if ((unsigned)ft_strlen(s + start) < len)
-		dst = malloc(sizeof(char) * (ft_strlen(s + start) + 1));
+		dst = protect(malloc(sizeof(char) * (ft_strlen(s + start) + 1)));
 	else
-		dst = malloc(sizeof(char) * (len + 1));
-	if (dst == NULL)
-		return (0);
+		dst = protect(malloc(sizeof(char) * (len + 1)));
 	while (i < len && (s + start)[i])
 	{
 		dst[i] = (s + start)[i];
@@ -61,20 +59,9 @@ char	*ft_substr_free(char const *s, unsigned int start, unsigned int len)
 	return (dst);
 }
 
-void	get_height_and_width(t_parse *parse, t_frame *frame)
+void	*protect(void *alloc)
 {
-	int	i;
-	int	width;
-
-	i = 0;
-	width = 0;
-	while (parse->map[i])
-	{
-		if ((int)ft_strlen(parse->map[i]) > width)
-			width = ft_strlen(parse->map[i]);
-		i++;
-	}
-	frame->map_conf->map_width = width + 1;
-	frame->map_conf->map_height = i;
-	i = 0;
+	if (!alloc)
+		exit_program("Malloc");
+	return (alloc);
 }

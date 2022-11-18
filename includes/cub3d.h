@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/09 15:59:33 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/11/15 13:49:37 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,23 +107,17 @@ typedef struct s_draw {
 # define SCREEN_WIDTH			960
 # define SCREEN_HEIGHT			500
 
-// void	draw_circle(t_data *img, int px, int py, int radius);
-// void	draw_player(t_data *img, t_player *pl, int radius);
-float	deg_to_rad(float a);
-float	fix_ang(float a);
 
-// void	draw_grid(t_data *img, int *map, int px, int py);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	exit_program(char *exit_message);
-char	*ft_substr_free(char const *s, unsigned int start, unsigned int len);
-void	get_height_and_width(t_parse *parse, t_frame *frame);
 
 //Raycast
+float	fix_ang(float a);
+float	deg_to_rad(float a);
 void	cast_rays(t_player pl, t_map map_conf, t_data *img);
 float	ray_dist(t_player pl, t_ray *ray, float ra, t_map map_conf);
 
 //Draw
 void	draw_wall(t_line li, t_data *walls, t_map map_conf, t_data *img);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 //Parsing
 void	init_parse(t_parse *parse);
@@ -141,14 +135,11 @@ char	*get_texture(t_parse *parse, int i, int j, int skip_name);
 void	read_textures(t_parse *parse);
 
 //Parse_utils
+void	get_height_and_width(t_parse *parse, t_frame *frame);
 int		check_newline_map(char *str);
 void	get_position(t_parse *parse, t_frame *frame, int i, int j);
 int		check_valid_characters_map(t_parse *parse, t_map map_conf);
 char	*ft_strjoin_free(char *s1, char const *s2);
-
-// int		check_spaces(t_parse *parse);
-
-//Parse_utils1
 void	init_parse(t_parse *parse);
 int		arrlen(char **map_d);
 int		linelen(char **map_d);
@@ -162,5 +153,10 @@ int		red_cross(int keycode, t_key *key);
 int		key_release(int keycode, t_key *key);
 int		key_press(int keycode, t_key *key);
 int		check_keys(t_key *key, int type);
+
+//Utils
+void	exit_program(char *exit_message);
+char	*ft_substr_free(char const *s, unsigned int start, unsigned int len);
+void	*protect(void *alloc);
 
 #endif

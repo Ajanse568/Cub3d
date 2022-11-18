@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/12 11:12:06 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/09 13:28:39 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/11/15 13:53:51 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	read_args(t_parse *parse, char *file_name)
 		if (read_return == -1)
 			exit_program("A read error occured.\n");
 		if (!check)
-			parse->str = ft_strdup(parse->ch);
+			parse->str = protect(ft_strdup(parse->ch));
 		else
 			parse->str = ft_strjoin_free(parse->str, parse->ch);
 		check = 1;
@@ -38,7 +38,7 @@ int	read_args(t_parse *parse, char *file_name)
 	parse->str[ft_strlen(parse->str) - 1] = '\0';
 	if (check_newline_map(parse->str))
 		exit_program("The map or the arguments are incorrect.\n");
-	parse->args = ft_split(parse->str, '\n');
+	parse->args = protect(ft_split(parse->str, '\n'));
 	return (0);
 }
 
@@ -60,10 +60,10 @@ void	make_map(t_parse *parse, t_frame *frame)
 	i = parse->i;
 	while (parse->args[i])
 		i++;
-	parse->map = ft_calloc((i - parse->i) + 2, sizeof(char *));
+	parse->map = protect(ft_calloc((i - parse->i) + 2, sizeof(char *)));
 	while (parse->args[parse->i])
 	{
-		parse->map[k] = ft_strdup(parse->args[parse->i]);
+		parse->map[k] = protect(ft_strdup(parse->args[parse->i]));
 		parse->i++;
 		k++;
 	}
@@ -78,7 +78,7 @@ char	*conv_to_arr(char **map_d)
 
 	len = arrlen(map_d);
 	line_len = linelen(map_d);
-	map = ft_calloc(len * line_len + 1, sizeof(char));
+	map = protect(ft_calloc(len * line_len + 1, sizeof(char)));
 	i = 0;
 	while (i < len)
 	{

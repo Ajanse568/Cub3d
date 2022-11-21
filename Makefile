@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 COMPILE = $(CC) $(CFLAGS)
 LIBFT = ./libft
 LIB = $(LIBFT)/libft.a

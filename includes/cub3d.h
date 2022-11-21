@@ -6,7 +6,7 @@
 /*   By: ajanse <ajanse@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/01 18:19:14 by ajanse        #+#    #+#                 */
-/*   Updated: 2022/11/15 13:49:37 by ajanse        ########   odam.nl         */
+/*   Updated: 2022/11/21 11:23:18 by ajanse        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ typedef struct s_draw {
 # define X_EVENT_KEY_RELEASE	3
 # define SCREEN_WIDTH			960
 # define SCREEN_HEIGHT			500
-
-
 
 //Raycast
 float	fix_ang(float a);

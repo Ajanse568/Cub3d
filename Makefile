@@ -33,8 +33,8 @@ SRCS =	main.c\
 		parse.c\
 		read_textures.c\
 		cast_ray.c\
-		make_rayspos_test.c\
-		drawpos_test.c\
+		make_rayspos.c\
+		drawpos.c\
 		rgb_to_hex.c
 
 ODIR = ./obj
